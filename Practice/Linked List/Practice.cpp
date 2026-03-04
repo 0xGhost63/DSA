@@ -12,12 +12,12 @@ struct Node
 class Linked_List
 {
     public:
-    Node* head;
-    Node* tail;
+    Node* headNode;
+    Node* tailNode;
 
     Linked_List()
     {
-        head=tail=NULL;
+        headNode=tailNode=NULL;
     }
 
     void push_back(int value)
@@ -25,21 +25,21 @@ class Linked_List
         Node* newNode = new Node;
         newNode->value = value;
         newNode->next = NULL;
-    
-        if (head == NULL)
+
+        if (headNode == NULL)
         {
-            head = tail = newNode;
+            headNode = tailNode = newNode;
         }
         else
         {
-            tail->next = newNode;
-            tail = newNode;
+            tailNode->next = newNode;
+            tailNode = newNode;
         }
     }
     void print()
 
     {
-        Node* temp=head;
+        Node* temp=headNode;
 
         while(temp!=NULL)
         {
