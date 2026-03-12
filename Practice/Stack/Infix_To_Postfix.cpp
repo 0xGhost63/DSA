@@ -35,12 +35,12 @@ int main()
         }
         else  if (input[i] ==')') 
         {
-            while (!s.empty() && s.top() != '(') 
+            while (s.top() != '(') 
             {
                 postfix += s.top();
                 s.pop();
             }
-            if (!s.empty() && s.top() == '(')
+            if (s.top() == '(')
                 s.pop(); 
 
         }
