@@ -134,6 +134,83 @@ class Circular_LL
             }
 
         }
+
+
+        void push_to_randomly(int pos,int value)
+        {
+
+            Node* temp =head;
+            if(head==NULL)
+            {
+                cout<<"Linked list was empty...so pushing to rear !\n";
+                string before = "";
+                push_rear(value);
+                print();
+                return;
+
+            }
+
+            else
+            {
+                Node * newNode= new Node;
+
+                //In center
+                do
+                {
+                    if (temp->data==pos)
+                    {
+                        newNode->data=value;
+                        newNode->next=temp->next;
+                        temp->next=newNode;
+                        cout<<"Value added : "<<value<<" after : "<<pos<<endl;
+                        print();
+                        return;
+
+                    }
+                    temp=temp->next;
+                }
+                while(temp!=head);
+
+            }
+
+        }
+
+        void delete_randomly(int pos)
+        {
+            if (head==NULL)
+            {
+                cout<<"The Linked-List is already Empty !\n";
+            }
+            else if (pos==0)
+            {
+                pop_front();
+            }
+            else
+            {
+                Node * temp =head;
+                Node* prevNode=temp;
+
+                for (int i =0;i<pos;i++)
+                {
+                    prevNode=temp;
+                    temp=temp->next;
+                }
+                if(temp->next==head)
+                {
+                    pop_rear();
+                }
+                else
+                {
+                    prevNode->next=temp->next;
+                    cout<<"DELETED !\n";
+                    cout<<"Node with value : "<<temp->data <<" and memory pointer : "<<temp->next<<" at position : "<<pos<<endl;
+                    delete temp;
+                    print();
+                }
+
+            }
+        }
+
     void print()
     {
         if(head==NULL)
@@ -151,64 +228,89 @@ class Circular_LL
         cout<<"HEADDDD\n";
     }
 };
+
+void menu()
+{
+
+    cout << "\n=================== Circular Linked List Menu ===================\n";
+    cout << "1. Push Front\n";
+    cout << "2. Push Rear\n";
+    cout << "3. Pop Front\n";
+    cout << "4. Pop Rear\n";
+    cout << "5. Print List\n";
+    cout << "6. Push Randomly\n";
+    cout << "7. Delete Randomly\n";
+    cout << "8. Exit\n";
+    cout<<"======================================================================\n";
+    cout << "Enter your choice : ";
+    
+}
+
 int main()
 {
     Circular_LL list;
 
-    //Test-Cases !!
+    int choice=0;
+    while(choice!=8)
+    {
+        menu();
+        cin >> choice;
 
-    cout<<"\n===== PHASE 1 : Build list =====\n";
-    list.push_front(1);
-    list.push_front(2);
-    list.push_front(3);
-    list.push_front(4);
-    list.push_front(5);
+        switch(choice)
+        {
+            case 1:
+            {
+                int value;
+                cout << "Enter the value to push : ";
+                cin >> value;
+                list.push_front(value);
+                break;
+            }
+            case 2:
+            {
+                int value;
+                cout << "Enter the value to push : ";
+                cin >> value;
+                list.push_rear(value);
+                break;
+            }
+            case 3:
+                list.pop_front();
+                break;
+            case 4:
+                list.pop_rear();
+                break;
+            case 5:
+                list.print();
+                break;
 
-    cout<<"\n===== PHASE 2 : Rear insertions =====\n";
-    list.push_rear(6);
-    list.push_rear(7);
-    list.push_rear(8);
+            case 6:
+            {
+                int pos,value;
+                cout<<"Enter the node value after which you want to insert : ";
+                cin>>pos;
+                cout<<"Enter value to insert : ";
+                cin>>value;
+                list.push_to_randomly(pos,value);
+                break;
+            }
 
-    cout<<"\n===== PHASE 3 : Mixed deletions =====\n";
-    list.pop_front();
-    list.pop_rear();
-    list.pop_front();
-    list.pop_rear();
+            case 7:
+            {
+                int pos;
+                cout<<"Enter index to delete (0-index baseed) : ";
+                cin>>pos;
+                list.delete_randomly(pos);
+                break;
+            }
 
-    cout<<"\n===== PHASE 4 : Rebuild again =====\n";
-    list.push_front(9);
-    list.push_rear(10);
-    list.push_front(11);
-    list.push_rear(12);
+            case 8:
+                cout << "Exiting...\n";
+                break;
 
-    cout<<"\n===== PHASE 5 : Rapid deletions =====\n";
-    list.pop_front();
-    list.pop_front();
-    list.pop_rear();
-    list.pop_rear();
+            default:
+                cout << "Invalid choice!\n";
+        }
+    }
 
-    cout<<"\n===== PHASE 6 : Single node stress =====\n";
-    list.pop_front();
-    list.pop_front();
-    list.pop_front();
-    list.pop_front();
-    list.pop_front(); // should become empty
-
-    cout<<"\n===== PHASE 7 : Reuse after empty =====\n";
-    list.push_rear(100);
-    list.push_front(200);
-    list.push_rear(300);
-    list.push_front(400);
-
-    cout<<"\n===== PHASE 8 : Final destruction =====\n";
-    list.pop_rear();
-    list.pop_front();
-    list.pop_rear();
-    list.pop_front();
-
-    cout<<"\n===== PHASE 9 : Empty again =====\n";
-    list.pop_front();
-    list.pop_rear();
-
-    return 0;
 }
