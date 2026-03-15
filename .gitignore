@@ -1,10 +1,14 @@
-
 a.out
 *.out
 *.exe
-
 *.o
 
 .vscode/
 
 Todo.txt
+
+
+*.dSYM/
+*.gch
+*.pch
+*.d
