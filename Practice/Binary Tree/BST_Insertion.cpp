@@ -45,6 +45,18 @@ void inorder(Node*root)
     inorder(root->right);
 }
 
+void postorder(Node*root)
+{
+    if (root==NULL)
+    {
+        return;
+    }
+    postorder(root->left);
+    postorder(root->right);
+    cout<<root->value<<" ";
+}
+
+
 int main() 
 {
     Node* root = NULL;
