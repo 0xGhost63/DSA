@@ -304,8 +304,9 @@ int main()
         if (choice==1)
         {
             string content;
+            cin.ignore();
             cout<<"Enter the content : ";
-            cin>>content;
+            getline(cin,content);
             list.push_rear(content);
             list.current=list.tail;
             list.printCurrent();
